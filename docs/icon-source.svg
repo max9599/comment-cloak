@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="7" y1="4" x2="34" y2="37" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1A2530"/>
+      <stop offset="0.58" stop-color="#0F171F"/>
+      <stop offset="1" stop-color="#090E13"/>
+    </linearGradient>
+
+    <linearGradient id="steel" x1="8" y1="10" x2="29" y2="28" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#A1ABB5"/>
+      <stop offset="0.55" stop-color="#7D8894"/>
+      <stop offset="1" stop-color="#5D6974"/>
+    </linearGradient>
+
+    <linearGradient id="mint" x1="21" y1="20" x2="34" y2="31" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5AF0B6"/>
+      <stop offset="1" stop-color="#31E4A2"/>
+    </linearGradient>
+
+    <radialGradient id="sheen" cx="0" cy="0" r="1"
+      gradientTransform="translate(11 7) rotate(47) scale(24 19)">
+      <stop stop-color="#334250" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#334250" stop-opacity="0"/>
+    </radialGradient>
+
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1" flood-color="#000" flood-opacity=".65"/>
+    </filter>
+  </defs>
+
+  <!-- rounded tile -->
+  <g filter="url(#shadow)">
+    <rect x="2" y="2" width="36" height="36" rx="8.3" fill="url(#bg)"/>
+    <rect x="2.45" y="2.45" width="35.1" height="35.1" rx="7.9"
+          stroke="#2C3741" stroke-opacity=".72" stroke-width=".9"/>
+    <rect x="2" y="2" width="36" height="36" rx="8.3" fill="url(#sheen)"/>
+  </g>
+
+  <!-- top comment marker -->
+  <g stroke="url(#steel)" stroke-width="2.55" stroke-linecap="round">
+    <path d="M11.0 10.9L8.7 16.5"/>
+    <path d="M14.8 10.9L12.5 16.5"/>
+  </g>
+
+  <!-- top code lines -->
+  <g stroke="url(#steel)" stroke-linecap="round">
+    <path d="M17.4 12.8H29.0" stroke-width="2.35"/>
+    <path d="M17.0 16.3H27.0" stroke-width="2.1"/>
+  </g>
+
+  <!-- lower comment marker -->
+  <g stroke="url(#steel)" stroke-width="2.55" stroke-linecap="round">
+    <path d="M10.0 20.3L7.7 25.9"/>
+    <path d="M13.8 20.3L11.5 25.9"/>
+  </g>
+
+  <!-- lower code lines -->
+  <g stroke="url(#steel)" stroke-linecap="round">
+    <path d="M16.0 22.1H24.8" stroke-width="2.2"/>
+    <path d="M15.6 25.5H21.8" stroke-width="1.95"/>
+  </g>
+
+  <!-- subtle hidden-eye icon: smaller and thinner -->
+  <g>
+    <path d="M20.9 26.8
+             C22.7 24.3 24.9 23.2 27.2 23.2
+             C29.5 23.2 31.6 24.3 33.4 26.8
+             C31.6 29.2 29.5 30.3 27.2 30.3
+             C24.9 30.3 22.7 29.2 20.9 26.8Z"
+          stroke="url(#mint)" stroke-width="1.65"
+          stroke-linejoin="round" fill="none"/>
+
+    <circle cx="27.2" cy="26.8" r="1.9" fill="url(#mint)"/>
+
+    <path d="M21.0 31.0L33.2 21.4"
+          stroke="url(#mint)" stroke-width="1.95"
+          stroke-linecap="round"/>
+  </g>
+</svg>

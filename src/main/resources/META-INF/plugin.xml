@@ -1,0 +1,134 @@
+<idea-plugin>
+    <id>io.github.maximgromov.commentcloak</id>
+    <name>CommentCloak</name>
+    <version>0.1.0</version>
+    <vendor>Maxim Gromov</vendor>
+
+    <description><![CDATA[
+        <p><b>Hide AI noise. Keep what matters.</b></p>
+
+        <p>AI-generated code comes with AI comments. Copilot, Claude, Cursor and friends narrate
+        every step &mdash; <code>// Increment the counter by one</code> sitting directly above
+        <code>counter++</code>. Individually harmless, collectively they double the height of every
+        file and bury the three comments that actually explain something. CommentCloak is a comment
+        filter for exactly that: it cloaks the narration and leaves the signal.</p>
+
+        <p><b>How it works.</b> CommentCloak does not rewrite anything. It collapses code comments
+        using the editor's own fold regions &mdash; the same mechanism the IDE uses to fold imports
+        and method bodies. Nothing is deleted, nothing is reformatted, the file on disk is untouched
+        and version control sees no change at all. Toggle it back off and every comment reappears
+        exactly where it was. Hover a marker to peek at the text it stands for, or click it to reveal
+        that one comment &mdash; it cloaks itself again once your caret leaves it.</p>
+
+        <h3>Features</h3>
+        <ul>
+            <li><b>One-key toggle</b> &mdash; <code>Ctrl+Alt+/</code> to hide or show comments
+                everywhere at once. The setting is remembered across restarts.</li>
+            <li><b>Right-click menu entry</b> in the editor, plus an entry in the <b>View</b> menu.</li>
+            <li><b>Status bar switch</b> showing <code>Comments: hidden</code> /
+                <code>Comments: shown</code> &mdash; click it to flip.</li>
+            <li><b>Keeps what matters</b>: <code>TODO</code>, <code>FIXME</code>, <code>HACK</code>,
+                <code>XXX</code>, <code>BUG</code> and <code>NOTE</code> stay visible.</li>
+            <li><b>Keeps tool directives</b>: <code>eslint-disable</code>, <code>@ts-ignore</code>,
+                <code>@ts-expect-error</code>, <code>noinspection</code>, <code>noqa</code>,
+                <code>prettier-ignore</code>, <code>biome-ignore</code>, region markers and more.</li>
+            <li><b>Keeps license headers</b>: <code>Copyright</code>, <code>SPDX-License</code>,
+                <code>@license</code>, <code>@preserve</code>.</li>
+            <li><b>Keeps only the paragraph that matters</b>: in a fifteen-line block with a single
+                <code>TODO</code> buried in it, CommentCloak keeps the TODO paragraph and hides the
+                essay around it instead of leaving the whole block on screen.</li>
+            <li><b>Compact marker</b>: a hidden block collapses to a small rounded pill showing the
+                CommentCloak icon and how many lines it stands for &mdash; drawn on the comment's own
+                lines, so nothing above it moves. Prefer the stock fold placeholder? Switch the
+                marker style in the settings.</li>
+            <li><b>Documentation comments too</b> &mdash; AI assistants love essay-length JSDoc blocks,
+                so <code>/** &hellip; */</code> is cloaked by default; one checkbox keeps JSDoc / KDoc /
+                docstrings visible if you prefer.</li>
+            <li><b>Per-kind filters</b>: choose independently whether to fold comments that are line
+                (<code>//</code>, <code>#</code>, <code>--</code>), block (<code>/* &hellip; */</code>),
+                documentation (<code>/** &hellip; */</code>) or HTML (<code>&lt;!-- &hellip; --&gt;</code>).</li>
+            <li><b>Minimum length filter</b> &mdash; keep the one-liners, hide only the essay-style
+                explanations an assistant left behind.</li>
+            <li><b>Regex keep-list</b> &mdash; add your own patterns; anything matching is never hidden.</li>
+            <li><b>Whole-line collapsing</b> &mdash; consecutive comment lines fold into a single small
+                placeholder, taking their line breaks and indentation with them, so no blank gaps remain.</li>
+            <li><b>Caret aware</b> &mdash; the comment you are editing is never folded out from under
+                your cursor. Click a marker to reveal a comment; it cloaks itself again once your
+                caret leaves it, so nothing you open stays open by accident.</li>
+            <li><b>Works everywhere</b> &mdash; IntelliJ IDEA, WebStorm, PyCharm, GoLand, Rider,
+                PhpStorm, RubyMine, CLion, DataGrip and Android Studio, in any language whose parser
+                produces comment tokens: TypeScript, JavaScript, Python, Java, Kotlin, Go, C#, Rust,
+                PHP, Ruby, SQL, YAML, HTML and the rest.</li>
+        </ul>
+
+        <p>Keywords: hide comments, fold comments, comment filter, code comments, AI comments,
+        AI-generated code.</p>
+    ]]></description>
+
+    <change-notes><![CDATA[
+        <h3>0.1.0</h3>
+        <ul>
+            <li>First release.</li>
+            <li>Global hide/show toggle bound to <code>Ctrl+Alt+/</code>, with entries in the
+                <b>View</b> menu and the editor context menu.</li>
+            <li>Status bar widget showing and flipping the current state.</li>
+            <li>Per-kind filters for line, block, documentation and HTML comments.</li>
+            <li>Default keep-list for TODO/FIXME/HACK, linter and compiler directives,
+                region markers and license headers; fully editable as regular expressions.</li>
+            <li>Minimum-length filter and configurable placeholder.</li>
+            <li>Consecutive comment lines merge into one fold; whole-line collapsing leaves no gaps.</li>
+            <li>Partial hiding: a block comment that matches a keep pattern keeps only the matching
+                paragraph and hides the rest.</li>
+            <li>Compact pill marker with the line count, or the classic fold placeholder.</li>
+            <li>Caret-aware folding: revealed comments re-cloak when the caret leaves them, and the
+                markers are repaired after the IDE's own folding passes.</li>
+        </ul>
+    ]]></change-notes>
+
+    <idea-version since-build="252"/>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable
+                parentId="editor"
+                id="io.github.maximgromov.commentcloak.settings"
+                displayName="CommentCloak"
+                instance="io.github.maximgromov.commentcloak.CommentCloakConfigurable"/>
+
+        <statusBarWidgetFactory
+                id="CommentCloakWidget"
+                order="before positionWidget"
+                implementation="io.github.maximgromov.commentcloak.CommentCloakWidgetFactory"/>
+    </extensions>
+
+    <applicationListeners>
+        <listener class="io.github.maximgromov.commentcloak.CommentCloakEditorFactoryListener"
+                  topic="com.intellij.openapi.editor.event.EditorFactoryListener"/>
+    </applicationListeners>
+
+    <projectListeners>
+        <listener class="io.github.maximgromov.commentcloak.CommentCloakFileEditorListener"
+                  topic="com.intellij.openapi.fileEditor.FileEditorManagerListener"/>
+    </projectListeners>
+
+    <actions>
+        <action id="CommentCloak.Toggle"
+                class="io.github.maximgromov.commentcloak.ToggleCommentCloakAction"
+                text="Hide Comments"
+                description="CommentCloak: visually hide code comments — files are never modified"
+                icon="io.github.maximgromov.commentcloak.CommentCloakIcons.Cloak">
+            <add-to-group group-id="ViewMenu" anchor="last"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt SLASH"/>
+            <keyboard-shortcut keymap="Mac OS X 10.5+" first-keystroke="ctrl alt SLASH"/>
+        </action>
+
+        <action id="CommentCloak.Settings"
+                class="io.github.maximgromov.commentcloak.CommentCloakSettingsAction"
+                text="CommentCloak Settings..."
+                description="Configure which comments CommentCloak hides">
+            <add-to-group group-id="ViewMenu" anchor="after" relative-to-action="CommentCloak.Toggle"/>
+        </action>
+    </actions>
+</idea-plugin>
