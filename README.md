@@ -9,6 +9,18 @@
 An IntelliJ Platform plugin that visually cloaks source-code comments in the editor — without
 touching a single byte of your files.
 
+## Screenshots
+
+Real WebStorm 2025.2 editor, same file, one keystroke apart. Left: AI narration everywhere.
+Right: CommentCloak on — each hidden block becomes a small pill, the `TODO` paragraph inside the
+JSDoc stays visible, and the `eslint-disable` directive is kept.
+
+![Before and after CommentCloak](docs/screenshots/03-before-after.png)
+
+The status bar shows the current state and toggles on click:
+
+![Status bar widget](docs/screenshots/04-status-bar.png)
+
 ## Why
 
 AI-generated code comes with AI comments. Copilot, Claude, Cursor and friends narrate every step:
