@@ -2,7 +2,7 @@
     <id>io.github.maximgromov.commentcloak</id>
     <name>CommentCloak</name>
     <version>0.1.0</version>
-    <vendor>Maxim Gromov</vendor>
+    <vendor url="https://github.com/max9599/comment-cloak">Maxim Gromov</vendor>
 
     <description><![CDATA[
         <p><b>Hide AI noise. Keep what matters.</b></p>

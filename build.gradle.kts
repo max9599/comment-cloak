@@ -19,8 +19,10 @@ repositories {
 
 dependencies {
     intellijPlatform {
-        // Build against the locally installed WebStorm 2025.2.x (no IDE download).
-        local("/Applications/WebStorm.app")
+        // Locally: build against the installed WebStorm (no IDE download).
+        // On CI (or any machine without it): download the matching WebStorm build.
+        val localIde = System.getenv("COMMENT_CLOAK_IDE")?.let(::file) ?: file("/Applications/WebStorm.app")
+        if (localIde.exists()) local(localIde) else webstorm("2025.2.5")
 
         // Needed only so that tests can configure .ts / .js files.
         bundledPlugin("JavaScript")
