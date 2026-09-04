@@ -2,7 +2,9 @@
 
 **Hide AI noise. Keep what matters.**
 
-**Website:** https://max9599.github.io/comment-cloak/
+**Website:** https://max9599.github.io/comment-cloak/ · **Marketplace:** https://plugins.jetbrains.com/plugin/34096
+
+[![JetBrains Marketplace](https://img.shields.io/jetbrains/plugin/v/34096?label=Marketplace&color=3ee6a5)](https://plugins.jetbrains.com/plugin/34096) [![Downloads](https://img.shields.io/jetbrains/plugin/d/34096?color=3ee6a5)](https://plugins.jetbrains.com/plugin/34096) [![CI](https://github.com/max9599/comment-cloak/actions/workflows/ci.yml/badge.svg)](https://github.com/max9599/comment-cloak/actions/workflows/ci.yml)
 
 [![CommentCloak](docs/poster.png)](https://max9599.github.io/comment-cloak/)
 
@@ -104,7 +106,12 @@ imports and method bodies.
 
 Invalid regular expressions are reported when you press **Apply**.
 
-## Install from disk
+## Install
+
+**From the Marketplace (recommended):** in your IDE open **Settings → Plugins → Marketplace**, search for
+*CommentCloak* and click **Install** — or open the [Marketplace page](https://plugins.jetbrains.com/plugin/34096).
+
+### From disk
 
 1. Build the zip (below) or download `comment-cloak-0.1.0.zip`.
 2. In the IDE, open **Settings/Preferences | Plugins**.
@@ -144,7 +151,6 @@ installation to build against that instead.
 - **Dim-instead-of-hide mode** — fade comments to a low-contrast colour rather than folding them.
 - **Per-project settings** — different rules for different codebases.
 - **File and language exclusions** — never cloak comments in, say, migrations or `.d.ts` files.
-- **Marketplace release** — publish to the JetBrains Marketplace.
 
 ## License
 
